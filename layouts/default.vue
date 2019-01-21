@@ -1,8 +1,29 @@
 <template>
-  <div>
-    <nuxt/>
-  </div>
+  <el-container>
+    <el-aside><Aside/></el-aside>
+    <el-container>
+      <el-header><Header/></el-header>
+      <el-main>
+        <nuxt/>
+      </el-main>
+      <el-footer><Footer/></el-footer>
+    </el-container>
+  </el-container>
 </template>
+
+<script>
+import Aside from '~/components/layout/aside.vue'
+import Header from '~/components/layout/header.vue'
+import Footer from '~/components/layout/footer.vue'
+
+export default {
+  components: {
+    Aside,
+    Header,
+    Footer
+  }
+}
+</script>
 
 <style>
 html {
@@ -51,5 +72,24 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+
+.el-footer {
+  height: 2rem !important;
+  color: #fff;
+  background-color: #edf0f4;
+}
+
+body > .el-container {
+  margin-bottom: 40px;
+}
+
+.el-container:nth-child(5) .el-aside,
+.el-container:nth-child(6) .el-aside {
+  line-height: 260px;
+}
+
+.el-container:nth-child(7) .el-aside {
+  line-height: 320px;
 }
 </style>

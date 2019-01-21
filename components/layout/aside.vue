@@ -1,49 +1,45 @@
 <template>
-  <div class="wrapper">
-    <div class="logo-container">
+  <el-menu
+    default-active="2"
+    class="el-menu-vertical-demo"
+    background-color="#545c64"
+    text-color="#fff"
+    active-text-color="#ffd04b"
+    @open="handleOpen"
+    @close="handleClose">
+    <div index="0" class="logo-container">
       <i class="el-icon-menu">&nbsp;&nbsp;&nbsp;Simple database</i>
     </div>
-    <div class="menu-container">
-      <el-menu
-        default-active="2"
-        class="el-menu-vertical-demo"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b"
-        @open="handleOpen"
-        @close="handleClose">
-        <el-submenu index="1">
-          <template slot="title">
-            <i class="el-icon-location"/>
-            <span>Navigator One</span>
-          </template>
-          <el-menu-item-group title="Group One">
-            <el-menu-item index="1-1">item one</el-menu-item>
-            <el-menu-item index="1-2">item one</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="Group Two">
-            <el-menu-item index="1-3">item three</el-menu-item>
-          </el-menu-item-group>
-          <el-submenu index="1-4">
-            <template slot="title">item four</template>
-            <el-menu-item index="1-4-1">item one</el-menu-item>
-          </el-submenu>
-        </el-submenu>
-        <el-menu-item index="2">
-          <i class="el-icon-menu"/>
-          <span>Navigator Two</span>
-        </el-menu-item>
-        <el-menu-item index="3" disabled>
-          <i class="el-icon-document"/>
-          <span>Navigator Three</span>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <i class="el-icon-setting"/>
-          <span>Navigator Four</span>
-        </el-menu-item>
-      </el-menu>
-    </div>
-  </div>
+    <el-menu-item index="1">
+      <i class="material-icons">home</i>
+      <span>&nbsp;&nbsp;&nbsp;Home</span>
+    </el-menu-item>
+    <el-submenu index="2">
+      <template slot="title">
+        <i class="material-icons">folder</i>
+        <span>&nbsp;&nbsp;&nbsp;Catalogues</span>
+      </template>
+      <el-menu-item-group title="Group One">
+        <el-menu-item index="1-1">item one</el-menu-item>
+        <el-menu-item index="1-2">item one</el-menu-item>
+      </el-menu-item-group>
+      <el-menu-item-group title="Group Two">
+        <el-menu-item index="1-3">item three</el-menu-item>
+      </el-menu-item-group>
+      <el-submenu index="1-4">
+        <template slot="title">item four</template>
+        <el-menu-item index="1-4-1">item one</el-menu-item>
+      </el-submenu>
+    </el-submenu>
+    <el-menu-item index="3" disabled>
+      <i class="el-icon-document"/>
+      <span>Administration</span>
+    </el-menu-item>
+    <el-menu-item index="4">
+      <i class="el-icon-setting"/>
+      <span>About</span>
+    </el-menu-item>
+  </el-menu>
 </template>
 
 <script>
