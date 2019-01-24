@@ -8,7 +8,7 @@
     @open="handleOpen"
     @close="handleClose">
     <div index="0" class="logo-container">
-      <i class="el-icon-menu">&nbsp;&nbsp;&nbsp;Simple database</i>
+      <i class="el-icon-menu"><text>&nbsp;&nbsp;&nbsp;Simple auth</text></i>
     </div>
     <el-menu-item index="1">
       <i class="material-icons">home</i>
@@ -19,10 +19,8 @@
         <i class="material-icons">folder</i>
         <span>&nbsp;&nbsp;&nbsp;Catalogues</span>
       </template>
-      <el-menu-item-group title="Group One">
-        <el-menu-item index="1-1">item one</el-menu-item>
-        <el-menu-item index="1-2">item one</el-menu-item>
-      </el-menu-item-group>
+      <el-menu-item index="1-1">Users</el-menu-item>
+      <el-menu-item index="1-2">Groups</el-menu-item>
       <el-menu-item-group title="Group Two">
         <el-menu-item index="1-3">item three</el-menu-item>
       </el-menu-item-group>
@@ -64,8 +62,9 @@ export default {
   text-align: left;
   padding-left: 1rem;
 }
-.logo-container i {
+.logo-container i, .logo-container text{
   line-height: 3.5rem;
+  font-family: "Mistral";
   font-weight: bold;
   font-size: 1.5rem;
   color: #ffff;
