@@ -1,3 +1,3 @@
 <template>
-  <h1>Catalogue</h1>
+  <div>Users</div>
 </template>

@@ -10,17 +10,17 @@
     <div index="0" class="logo-container">
       <i class="el-icon-menu"><text>&nbsp;&nbsp;&nbsp;Simple auth</text></i>
     </div>
-    <el-menu-item index="1">
-      <i class="material-icons">home</i>
-      <span>&nbsp;&nbsp;&nbsp;Home</span>
-    </el-menu-item>
+    <nuxt-link to="/">
+      <el-menu-item index="1">
+        <i class="material-icons">home</i>
+        <span>&nbsp;&nbsp;&nbsp;Home</span>
+      </el-menu-item>
+    </nuxt-link>
     <el-submenu index="2">
       <template slot="title">
         <i class="material-icons">folder</i>
         <span>&nbsp;&nbsp;&nbsp;Catalogues</span>
       </template>
-      <el-menu-item index="1-1">Users</el-menu-item>
-      <el-menu-item index="1-2">Groups</el-menu-item>
       <el-menu-item-group title="Group Two">
         <el-menu-item index="1-3">item three</el-menu-item>
       </el-menu-item-group>
@@ -29,14 +29,34 @@
         <el-menu-item index="1-4-1">item one</el-menu-item>
       </el-submenu>
     </el-submenu>
-    <el-menu-item index="3" disabled>
+    <el-submenu index="3">
+      <template slot="title">
+        <i class="material-icons">build</i>
+        <span>&nbsp;&nbsp;&nbsp;Administration</span>
+      </template>
+      <nuxt-link to="/administration/users">
+        <el-menu-item index="1-1">
+          <i class="material-icons">person</i>
+          <span>&nbsp;&nbsp;&nbsp;Users</span>
+        </el-menu-item>
+      </nuxt-link>
+      <nuxt-link to="/administration/groups">
+        <el-menu-item index="1-2">
+          <i class="material-icons">group</i>
+          <span>&nbsp;&nbsp;&nbsp;Groups</span>
+        </el-menu-item>
+      </nuxt-link>
+    </el-submenu>
+    <el-menu-item index="4" disabled>
       <i class="el-icon-document"/>
-      <span>Administration</span>
+      <span>Games</span>
     </el-menu-item>
-    <el-menu-item index="4">
-      <i class="el-icon-setting"/>
-      <span>About</span>
-    </el-menu-item>
+    <nuxt-link to="/about">
+      <el-menu-item index="5">
+        <i class="material-icons">comment</i>
+        <span>&nbsp;&nbsp;&nbsp;About</span>
+      </el-menu-item>
+    </nuxt-link>
   </el-menu>
 </template>
 
@@ -72,5 +92,9 @@ export default {
 .el-menu {
   height: 100vh;
   color: #ffff;
+}
+.el-menu a {
+  text-decoration: none;
+  color: inherit;
 }
 </style>
