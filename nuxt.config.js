@@ -15,7 +15,9 @@ module.exports = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
-
+  router: {
+    middleware: 'auth'
+  },
   /*
   ** Customize the progress-bar color
   */
@@ -29,7 +31,10 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ['@/plugins/element-ui'],
+  plugins: [
+    '@/plugins/inject',
+    '@/plugins/element-ui'
+  ],
 
   /*
   ** Nuxt.js modules
@@ -43,7 +48,7 @@ module.exports = {
   ** Axios module configuration
   */
   axios: {
-    // See https://github.com/nuxt-community/axios-module#options
+    baseURL: 'http://localhost:1337'
   },
 
   /*

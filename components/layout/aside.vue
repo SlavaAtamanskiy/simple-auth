@@ -8,7 +8,8 @@
     @open="handleOpen"
     @close="handleClose">
     <div index="0" class="logo-container">
-      <i class="el-icon-menu"><text>&nbsp;&nbsp;&nbsp;Simple auth</text></i>
+      <i class="el-icon-menu"/>
+      <span>&nbsp;&nbsp;&nbsp;Simple auth</span>
     </div>
     <nuxt-link to="/">
       <el-menu-item index="1">
@@ -82,9 +83,10 @@ export default {
   text-align: left;
   padding-left: 1rem;
 }
-.logo-container i, .logo-container text{
+.logo-container i,
+.logo-container span {
   line-height: 3.5rem;
-  font-family: "Mistral";
+  font-family: 'Mistral';
   font-weight: bold;
   font-size: 1.5rem;
   color: #ffff;
