@@ -1,14 +1,9 @@
-import { authenticate } from './auth'
+import { authenticate, removeCookies, processAuthError } from './auth'
 
 export default context => ({
-  authenticate: {
-    authenticate: authenticate.bind(context)
+  auth: {
+    authenticate: authenticate.bind(context),
+    removeCookies: removeCookies.bind(context),
+    processAuthError: processAuthError.bind(context)
   }
 })
-//export default function generateApi(context) {
-//  return {
-//  authenticate: {
-//    authenticate: authenticate.bind(context)
-//  }
-// }
-//}

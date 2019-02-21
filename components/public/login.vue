@@ -3,7 +3,7 @@
     <el-main>
       <el-card class="box-card">
         <div slot="header" class="clearfix" style="text-align:center;">
-          <span>Registration</span>
+          <span>Login</span>
         </div>
         <el-form ref="ruleForm2" :model="ruleForm2" :rules="rules2" status-icon label-width="120px" class="demo-ruleForm">
           <el-form-item label="Login" prop="login">
@@ -12,14 +12,11 @@
           <el-form-item label="Password" prop="pass">
             <el-input v-model="ruleForm2.pass" type="password" autocomplete="off"/>
           </el-form-item>
-          <el-form-item label="Confirm" prop="checkPass">
-            <el-input v-model="ruleForm2.checkPass" type="password" autocomplete="off"/>
+          <el-form-item>
+            <p>Don't have an account? <nuxt-link to="/register">Register</nuxt-link> </p>
           </el-form-item>
           <el-form-item>
-            <p>Already have an account? <a href="/" style="color:dodgerblue">Log in</a></p>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="success" @click="submitForm('ruleForm2')">Register</el-button>
+            <el-button type="success" @click="submitForm('ruleForm2')">Login</el-button>
             <el-button @click="resetForm('ruleForm2')">Reset</el-button>
           </el-form-item>
         </el-form>
@@ -30,6 +27,7 @@
 
 <script>
 export default {
+  name: 'Login',
   data() {
     var checkLogin = (rule, value, callback) => {
       if (!value) {
@@ -42,30 +40,16 @@ export default {
       if (value === '') {
         callback(new Error('Please input the password'))
       } else {
-        if (this.ruleForm2.checkPass !== '') {
-          this.$refs.ruleForm2.validateField('checkPass')
-        }
-        callback()
-      }
-    }
-    var validatePass2 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('Please input the password again'))
-      } else if (value !== this.ruleForm2.pass) {
-        callback(new Error("Two inputs don't match!"))
-      } else {
         callback()
       }
     }
     return {
       ruleForm2: {
         pass: '',
-        checkPass: '',
         login: ''
       },
       rules2: {
         pass: [{ validator: validatePass, trigger: 'blur' }],
-        checkPass: [{ validator: validatePass2, trigger: 'blur' }],
         login: [{ validator: checkLogin, trigger: 'blur' }]
       }
     }
@@ -74,7 +58,16 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert('submit!')
+          let payload = {
+            login: this.ruleForm2.login,
+            password: this.ruleForm2.pass
+          }
+          this.$store
+            .dispatch('auth/authenticate', payload)
+            .then(() => this.$router.push('/'))
+            .catch(err => {
+              this.$api.auth.processAuthError(err, this.$notify)
+            })
         } else {
           console.log('error submit!!')
           return false
@@ -89,6 +82,11 @@ export default {
 </script>
 
 <style scoped>
+@media (min-width: 1000px) {
+  .el-main {
+    max-width: 40%;
+  }
+}
 .el-container {
   justify-content: center;
   align-items: center;
@@ -96,10 +94,9 @@ export default {
   height: 100vh;
 }
 .el-main {
-  max-width: 40%;
   padding-bottom: 15%;
 }
 .el-form {
-  margin-right: 4.5rem;
+  margin-right: 3.5rem;
 }
 </style>

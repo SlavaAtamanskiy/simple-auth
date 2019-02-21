@@ -31,18 +31,15 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-    '@/plugins/inject',
-    '@/plugins/element-ui'
-  ],
+  plugins: ['@/plugins/inject', '@/plugins/element-ui'],
 
   /*
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    'nuxt-material-design-icons'
+    'nuxt-material-design-icons',
+    'cookie-universal-nuxt'
   ],
   /*
   ** Axios module configuration

@@ -9,7 +9,7 @@
         <el-menu-item index="2-3">Fax</el-menu-item>
       </el-submenu>
       <el-menu-item index="3" disabled>Info</el-menu-item>
-      <el-menu-item index="4">Logout</el-menu-item>
+      <el-menu-item index="4" @click="logOut">Logout</el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -27,6 +27,11 @@ export default {
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath)
+    },
+    logOut() {
+      this.$store
+        .dispatch('auth/logOut')
+        .then(() => this.$router.push('/login'))
     }
   }
 }
