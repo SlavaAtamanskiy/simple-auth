@@ -9,7 +9,7 @@ export default {
   components: {
     Register
   },
-  layout(context) {
+  layout() {
     return 'public'
   }
 }

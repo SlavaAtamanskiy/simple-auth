@@ -58,12 +58,11 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          let payload = {
-            login: this.ruleForm2.login,
-            password: this.ruleForm2.pass
-          }
           this.$store
-            .dispatch('auth/authenticate', payload)
+            .dispatch('auth/authenticate', {
+              login: this.ruleForm2.login,
+              password: this.ruleForm2.pass
+            })
             .then(() => this.$router.push('/'))
             .catch(err => {
               this.$api.auth.processAuthError(err, this.$notify)

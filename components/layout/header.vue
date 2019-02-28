@@ -28,10 +28,11 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath)
     },
-    logOut() {
+    async logOut() {
       this.$store
         .dispatch('auth/logOut')
         .then(() => this.$router.push('/login'))
+        .catch(err => this.$api.auth.processAuthError(err, this.$notify))
     }
   }
 }

@@ -1,6 +1,6 @@
-export const authenticate = async function(url, payload) {
-  const res = await this.$axios({
-    url: url,
+export const authenticate = async function(payload) {
+  const { status, data } = await this.$axios({
+    url: '/auth/local',
     method: 'post',
     data: {
       identifier: payload.login,
@@ -8,28 +8,46 @@ export const authenticate = async function(url, payload) {
     }
   })
 
-  if (res.status === 200) {
-    setCookies(res.data, this)
+  const res = {
+    status,
+    data: {
+      jwt: '',
+      user: {}
+    }
+  }
+
+  if (status === 200) {
+    setAuthToken(data.jwt, this)
+    setCookies(data, this)
+    res.data = Object.assign({}, data)
   }
 
   return res
 }
 
+export const reset = async function() {
+  await this.app.$cookies.removeAll()
+  resetAuthToken(this)
+  return true
+}
+
+const setAuthToken = function(token, context) {
+  context.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+}
+
 const setCookies = function(data, context) {
   const options = {
-    //path: '/'
+    path: '/'
   }
   const cookieList = [
     { name: 'user', value: data.user, opts: options },
     { name: 'jwt', value: data.jwt, opts: options }
   ]
-
   context.app.$cookies.setAll(cookieList)
 }
 
-export const removeCookies = async function(data) {
-  this.app.$cookies.removeAll()
-  return true
+const resetAuthToken = function(context) {
+  delete context.$axios.defaults.headers.common['Authorization']
 }
 
 export const processAuthError = function(err, callback) {

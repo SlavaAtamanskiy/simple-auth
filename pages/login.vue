@@ -9,7 +9,7 @@ export default {
   components: {
     Login
   },
-  layout(context) {
+  layout() {
     return 'public'
   }
 }

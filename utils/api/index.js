@@ -1,9 +1,13 @@
-import { authenticate, removeCookies, processAuthError } from './auth'
+import { authenticate, reset, processAuthError } from './auth'
+import { getAll } from './products'
 
 export default context => ({
   auth: {
     authenticate: authenticate.bind(context),
-    removeCookies: removeCookies.bind(context),
+    reset: reset.bind(context),
     processAuthError: processAuthError.bind(context)
+  },
+  products: {
+    getAll: getAll.bind(context)
   }
 })

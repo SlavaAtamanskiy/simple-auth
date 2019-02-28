@@ -22,13 +22,12 @@
         <i class="material-icons">folder</i>
         <span>&nbsp;&nbsp;&nbsp;Catalogues</span>
       </template>
-      <el-menu-item-group title="Group Two">
-        <el-menu-item index="1-3">item three</el-menu-item>
-      </el-menu-item-group>
-      <el-submenu index="1-4">
-        <template slot="title">item four</template>
-        <el-menu-item index="1-4-1">item one</el-menu-item>
-      </el-submenu>
+      <nuxt-link to="/catalogues/products">
+        <el-menu-item index="1-3">
+          <i class="material-icons">person</i>
+          <span>&nbsp;&nbsp;&nbsp;Products</span>
+        </el-menu-item>
+      </nuxt-link>
     </el-submenu>
     <el-submenu index="3">
       <template slot="title">
