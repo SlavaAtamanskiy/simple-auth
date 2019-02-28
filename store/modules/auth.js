@@ -36,7 +36,7 @@ const actions = {
       console.error(message)
     }
   },
-  async logOut({ dispatch, commit }) {
+  async logOut({ commit }) {
     try {
       const success = await this.$api.auth.reset()
       if (success) {

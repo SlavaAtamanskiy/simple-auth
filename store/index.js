@@ -26,17 +26,17 @@ const createStore = () => {
               user: cookies.user,
               jwt: cookies.jwt
             })
-              .then(res => {
+              .then(() => {
                 resolve(true)
               })
               .catch(error => {
                 console.log('Error in (store/index.js) :', error)
                 context.app.$api.auth.reset()
-                resolve(false)
+                reject(false)
               })
           } else {
             context.app.$api.auth.reset()
-            resolve(false)
+            reject(false)
           }
         })
       }
