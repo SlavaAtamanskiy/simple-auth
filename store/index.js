@@ -18,7 +18,7 @@ const createStore = () => {
       }
     },
     actions: {
-      nuxtServerInit({ dispatch }, context) {
+      async nuxtServerInit({ dispatch }, context) {
         return new Promise((resolve, reject) => {
           const cookies = context.app.$cookies.getAll()
           if (cookies.hasOwnProperty('user') && cookies.hasOwnProperty('jwt')) {
@@ -32,11 +32,11 @@ const createStore = () => {
               .catch(error => {
                 console.log('Error in (store/index.js) :', error)
                 context.app.$api.auth.reset()
-                reject(false)
+                resolve(false)
               })
           } else {
             context.app.$api.auth.reset()
-            reject(false)
+            resolve(false)
           }
         })
       }
