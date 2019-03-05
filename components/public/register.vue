@@ -9,6 +9,9 @@
           <el-form-item label="Login" prop="login">
             <el-input v-model="ruleForm2.login"/>
           </el-form-item>
+          <el-form-item label="E-mail" prop="email">
+            <el-input v-model="ruleForm2.email"/>
+          </el-form-item>
           <el-form-item label="Password" prop="pass">
             <el-input v-model="ruleForm2.pass" type="password" autocomplete="off"/>
           </el-form-item>
@@ -39,6 +42,13 @@ export default {
         callback()
       }
     }
+    var validateEmail = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('Please input the e-mail'))
+      } else {
+        callback()
+      }
+    }
     var validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('Please input the password'))
@@ -62,12 +72,14 @@ export default {
       ruleForm2: {
         pass: '',
         checkPass: '',
-        login: ''
+        login: '',
+        email: ''
       },
       rules2: {
         pass: [{ validator: validatePass, trigger: 'blur' }],
         checkPass: [{ validator: validatePass2, trigger: 'blur' }],
-        login: [{ validator: checkLogin, trigger: 'blur' }]
+        login: [{ validator: checkLogin, trigger: 'blur' }],
+        email: [{ validator: validateEmail, trigger: 'blur' }]
       }
     }
   },
@@ -75,9 +87,13 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert('submit!')
+          this.$store
+            .dispatch('auth/register', this.ruleForm2)
+            .then(() => this.$router.push('/'))
+            .catch(err => {
+              this.$api.auth.processRegisterError(err, this.$notify)
+            })
         } else {
-          console.log('error submit!!')
           return false
         }
       })

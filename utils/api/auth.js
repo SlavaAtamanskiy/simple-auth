@@ -25,6 +25,34 @@ export const authenticate = async function(payload) {
   return res
 }
 
+export const register = async function(payload) {
+  const { status, data } = await this.$axios({
+    url: '/auth/local/register',
+    method: 'post',
+    data: {
+      username: payload.login,
+      password: payload.pass,
+      email: payload.email
+    }
+  })
+
+  const res = {
+    status,
+    data: {
+      jwt: '',
+      user: {}
+    }
+  }
+
+  if (status === 200) {
+    setAuthToken(data.jwt, this)
+    setCookies(data, this)
+    res.data = Object.assign({}, data)
+  }
+
+  return res
+}
+
 export const reset = async function() {
   await this.app.$cookies.removeAll()
   resetAuthToken(this)
@@ -64,6 +92,17 @@ export const processAuthError = function(err, callback) {
     default:
       message = 'Something went wrong'
   }
+
+  callback({
+    title: message,
+    message: `Request failed with error code: ${code}`,
+    type: 'error'
+  })
+}
+
+export const processRegisterError = function(err, callback) {
+  const code = parseInt(err.response && err.response.status)
+  let message = 'Something went wrong'
 
   callback({
     title: message,

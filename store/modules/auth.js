@@ -29,11 +29,16 @@ const actions = {
       return Promise.reject(err)
     }
   },
-  async setState({ commit }, payload) {
+  async register({ commit }, payload) {
     try {
-      commit(types.SET_STATE, payload, { root: true })
-    } catch ({ message }) {
-      console.error(message)
+      const { status, data } = await this.$api.auth.register(payload)
+      if (status === 200) {
+        commit(types.SET_STATE, data, { root: true })
+      } else {
+        throw new Error('Could not authenticate')
+      }
+    } catch (err) {
+      return Promise.reject(err)
     }
   },
   async logOut({ commit }) {
@@ -44,6 +49,13 @@ const actions = {
       }
     } catch (err) {
       return Promise.reject(err)
+    }
+  },
+  async setState({ commit }, payload) {
+    try {
+      commit(types.SET_STATE, payload, { root: true })
+    } catch ({ message }) {
+      console.error(message)
     }
   }
 }
