@@ -1,5 +1,5 @@
 export default function({ store, redirect, route }) {
-  const userIsLoggedIn = store.getters.isAuthenticated
+  const userIsLoggedIn = store.getters['auth/isAuthenticated']
   const urlRequiresAuth =
     /^\/register(\/|$)/.test(route.fullPath) ||
     /^\/login(\/|$)/.test(route.fullPath)

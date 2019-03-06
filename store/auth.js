@@ -4,24 +4,28 @@ const types = Object.freeze({
 
 const getDefaultState = () => {
   return {
-    user: [],
+    user: {},
     jwt: ''
   }
 }
 
 // initial state
-const state = {}
+export const state = () => getDefaultState()
 
 // getters
-const getters = {}
+export const getters = {
+  isAuthenticated(state) {
+    return state.jwt.length > 0
+  }
+}
 
 // actions
-const actions = {
+export const actions = {
   async authenticate({ commit }, payload) {
     try {
       const { status, data } = await this.$api.auth.authenticate(payload)
       if (status === 200) {
-        commit(types.SET_STATE, data, { root: true })
+        commit(types.SET_STATE, data)
       } else {
         throw new Error('Could not authenticate')
       }
@@ -33,7 +37,7 @@ const actions = {
     try {
       const { status, data } = await this.$api.auth.register(payload)
       if (status === 200) {
-        commit(types.SET_STATE, data, { root: true })
+        commit(types.SET_STATE, data)
       } else {
         throw new Error('Could not authenticate')
       }
@@ -45,7 +49,7 @@ const actions = {
     try {
       const success = await this.$api.auth.reset()
       if (success) {
-        commit(types.SET_STATE, getDefaultState(), { root: true })
+        commit(types.SET_STATE, getDefaultState())
       }
     } catch (err) {
       return Promise.reject(err)
@@ -53,7 +57,7 @@ const actions = {
   },
   async setState({ commit }, payload) {
     try {
-      commit(types.SET_STATE, payload, { root: true })
+      commit(types.SET_STATE, payload)
     } catch ({ message }) {
       console.error(message)
     }
@@ -61,12 +65,8 @@ const actions = {
 }
 
 // mutations
-const mutations = {}
-
-export default {
-  namespaced: true,
-  state,
-  getters,
-  actions,
-  mutations
+export const mutations = {
+  [types.SET_STATE](state, data) {
+    state = Object.assign(state, data)
+  }
 }

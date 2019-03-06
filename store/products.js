@@ -6,16 +6,16 @@ const types = Object.freeze({
 })
 
 // initial state
-const state = {
+export const state = () => ({
   all: [],
   loading: false
-}
+})
 
 // getters
-const getters = {}
+export const getters = {}
 
 // actions
-const actions = {
+export const actions = {
   async getProducts({ commit }) {
     try {
       const { status, data } = await this.$api.products.getAll()
@@ -31,7 +31,7 @@ const actions = {
 }
 
 // mutations
-const mutations = {
+export const mutations = {
   [types.SET_PRODUCTS](state, items) {
     state.all = items
   },
@@ -47,12 +47,4 @@ const mutations = {
     let i = state.all.findIndex(itm => itm._id === id)
     if (i >= 0) state.all.splice(i, 1)
   }
-}
-
-export default {
-  namespaced: true,
-  state,
-  getters,
-  actions,
-  mutations
 }

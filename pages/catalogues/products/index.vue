@@ -1,7 +1,7 @@
 <template>
-    <Table
-      :all="all"
-      :loading="loading"/>
+  <Table
+    :all="all"
+    :loading="loading"/>
 </template>
 
 <script>
