@@ -1,6 +1,6 @@
 <template>
   <el-table
-    :data="products.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+    :data="all.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
     style="width: 100%">
     <el-table-column
       label="Name"
@@ -30,20 +30,22 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
   name: 'Table',
-  props: {},
+  props: {
+    all: {
+      type: Array,
+      default: () => []
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       search: ''
     }
-  },
-  computed: {
-    ...mapState({
-      products: state => state.products.all
-    })
   },
   methods: {
     handleEdit(index, row) {

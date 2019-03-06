@@ -7,7 +7,8 @@ const types = Object.freeze({
 
 // initial state
 const state = {
-  all: []
+  all: [],
+  loading: false
 }
 
 // getters
