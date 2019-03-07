@@ -5,7 +5,8 @@ import {
   processAuthError,
   processRegisterError
 } from './auth'
-import { getAll } from './products'
+
+import { getAll, remove, update, create } from './products'
 
 export default context => ({
   auth: {
@@ -16,6 +17,9 @@ export default context => ({
     processRegisterError: processRegisterError.bind(context)
   },
   products: {
-    getAll: getAll.bind(context)
+    getAll: getAll.bind(context),
+    remove: remove.bind(context),
+    update: update.bind(context),
+    create: create.bind(context)
   }
 })
