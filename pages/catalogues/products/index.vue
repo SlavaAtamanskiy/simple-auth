@@ -75,6 +75,14 @@ export default {
       this.form = getDefaults()
       this.$store.dispatch('products/setCurrent', this.form)
     })
+    this.$nuxt.$on('DIALOGUE_CLOSE', done => {
+      this.$confirm('Are you sure to close this dialog?')
+        .then(_ => {
+          done()
+          this.dialogFormVisible = !this.dialogFormVisible
+        })
+        .catch(_ => {})
+    })
     this.$nuxt.$on('CANCEL', () => {
       this.dialogFormVisible = !this.dialogFormVisible
     })

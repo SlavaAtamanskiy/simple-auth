@@ -36,7 +36,7 @@
       </el-table-column>
     </el-table>
 
-    <el-dialog :visible.sync="dialogFormVisible" :title="title">
+    <el-dialog :visible.sync="dialogFormVisible" :title="title" :before-close="handleClose">
       <el-form :model="form">
         <div v-for="(field, u) in fields" :key="u">
           <div v-if="field.type === 'input'">
@@ -110,6 +110,9 @@ export default {
     },
     handleCreate() {
       this.$nuxt.$emit('ROW_CREATE')
+    },
+    handleClose(done) {
+      this.$nuxt.$emit('DIALOGUE_CLOSE', done)
     },
     create() {
       this.$nuxt.$emit('CREATE')
